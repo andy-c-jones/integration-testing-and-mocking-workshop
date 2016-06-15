@@ -46,9 +46,16 @@
   <ItemGroup>
     <Compile Include="FilmRepositoryTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SqlHelper.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\IntegrationTestingAndMockingWorkshop\IntegrationTestingAndMockingWorkshop.csproj">
+      <Project>{33D63821-252A-42E6-BB09-4DB4A3147D96}</Project>
+      <Name>IntegrationTestingAndMockingWorkshop</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
