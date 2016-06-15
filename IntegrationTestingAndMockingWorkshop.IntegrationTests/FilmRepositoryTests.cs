@@ -15,7 +15,7 @@ namespace IntegrationTestingAndMockingWorkshop.IntegrationTests
         [SetUp]
         public void GivenAFilmRepository()
         {
-            SqlHelper.TruncateTable(SqlHelper.FilmsTable);
+            SqlHelper.TruncateFilmsTable();
 
             _repository = new FilmRepository();
         }

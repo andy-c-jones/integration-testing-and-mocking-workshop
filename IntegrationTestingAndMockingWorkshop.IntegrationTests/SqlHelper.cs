@@ -6,14 +6,13 @@ namespace IntegrationTestingAndMockingWorkshop.IntegrationTests
     public class SqlHelper
     {
         private const string ConnectionString = "Data Source=.;Initial Catalog=Films;Integrated Security=True";
-        public const string FilmsTable = "Films";
 
-        public static void TruncateTable(string tableName)
+        public static void TruncateFilmsTable()
         {
             using (var sqlConnection = new SqlConnection(ConnectionString))
             {
                 sqlConnection.Open();
-                string cmdText = $"TRUNCATE TABLE {tableName}";
+                string cmdText = "TRUNCATE TABLE Films";
                 var cmd = new SqlCommand(cmdText, sqlConnection);
                 cmd.ExecuteNonQuery();
             }
