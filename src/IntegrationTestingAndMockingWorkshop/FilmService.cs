@@ -9,9 +9,9 @@
             _filmRepository = filmRepository;
         }
 
-        public void AddFilm(string title, int year)
+        public AddResult AddFilm(string title, int year)
         {
-            _filmRepository.Add(new Film(title, year));
+            return _filmRepository.Add(new Film(title, year));
         }
     }
 }

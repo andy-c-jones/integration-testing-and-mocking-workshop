@@ -1,21 +1,47 @@
-﻿using System.Data;
+﻿using System;
+using System.Data;
 using System.Data.SqlClient;
 
 namespace IntegrationTestingAndMockingWorkshop
 {
     public class FilmRepository : IFilmRepository
     {
-        public void Add(Film film)
+        private readonly string _connectionString;
+
+        public FilmRepository(string connectionString)
         {
-            using (var sqlConnection = new SqlConnection("Data Source=.;Initial Catalog=Films;Integrated Security=True"))
+            _connectionString = connectionString;
+        }
+
+        public AddResult Add(Film film)
+        {
+            try
             {
-                sqlConnection.Open();
-                const string CmdText = "INSERT INTO Films (Title, Year) VALUES (@Title, @Year)";
-                var cmd = new SqlCommand(CmdText, sqlConnection);
-                cmd.Parameters.Add("Title", SqlDbType.NVarChar, -1).Value = film.Title;
-                cmd.Parameters.Add("Year", SqlDbType.Int).Value = film.Year;
-                cmd.ExecuteNonQuery();
+                using (var sqlConnection = new SqlConnection(_connectionString))
+                {
+                    sqlConnection.Open();
+                    const string cmdText = "INSERT INTO Films (Title, Year) VALUES (@Title, @Year)";
+                    var cmd = new SqlCommand(cmdText, sqlConnection);
+                    cmd.Parameters.Add("Title", SqlDbType.NVarChar, -1).Value = film.Title;
+                    cmd.Parameters.Add("Year", SqlDbType.Int).Value = film.Year;
+                    cmd.ExecuteNonQuery();
+                    return new AddResult(true);
+                }
             }
+            catch (Exception)
+            {
+                return new AddResult(false);
+            }
+        }
+    }
+
+    public class AddResult
+    {
+        public bool Successful { get; set; }
+
+        public AddResult(bool successful)
+        {
+            Successful = successful;
         }
     }
 }

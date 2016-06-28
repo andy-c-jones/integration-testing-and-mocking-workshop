@@ -12,7 +12,7 @@ namespace IntegrationTestingAndMockingWorkshop.IntegrationTests
         {
             SqlHelper.TruncateFilmsTable();
 
-            _repository = new FilmRepository();
+            _repository = new FilmRepository("Data Source=.;Initial Catalog=Films;Integrated Security=True");
         }
 
         [Test]
@@ -41,6 +41,36 @@ namespace IntegrationTestingAndMockingWorkshop.IntegrationTests
             var actualYear = SqlHelper.GetFirstRowsFilmYear();
 
             Assert.That(actualYear, Is.EqualTo(expectedYear));
+        }
+
+        [Test]
+        public void WhenAFilmFailsToBeAddedThenTheReturnValueShouldIndicateFailure()
+        {
+            var result = _repository.Add(new Film("A Film", 1954));
+
+            Assert.That(result.Successful, Is.True);
+        }
+    }
+
+    [TestFixture]
+    public class FilmRepositoryFailureTests
+    {
+        private FilmRepository _repository;
+
+        [SetUp]
+        public void GivenAFilmRepositoryWithAnIncorrectConnectionString()
+        {
+            SqlHelper.TruncateFilmsTable();
+
+            _repository = new FilmRepository("BrokenConnectionString");
+        }
+
+        [Test]
+        public void WhenAFilmFailsToBeAddedThenTheReturnValueShouldIndicateFailure()
+        {
+            var result = _repository.Add(new Film("A Film", 1954));
+
+            Assert.That(result.Successful, Is.False);
         }
     }
 }
