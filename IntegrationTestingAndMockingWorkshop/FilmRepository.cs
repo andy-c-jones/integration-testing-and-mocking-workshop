@@ -3,7 +3,7 @@ using System.Data.SqlClient;
 
 namespace IntegrationTestingAndMockingWorkshop
 {
-    public class FilmRepository
+    public class FilmRepository : IFilmRepository
     {
         public void Add(Film film)
         {

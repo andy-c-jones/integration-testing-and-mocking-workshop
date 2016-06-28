@@ -42,6 +42,8 @@
   <ItemGroup>
     <Compile Include="Film.cs" />
     <Compile Include="FilmRepository.cs" />
+    <Compile Include="FilmService.cs" />
+    <Compile Include="IFilmRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
