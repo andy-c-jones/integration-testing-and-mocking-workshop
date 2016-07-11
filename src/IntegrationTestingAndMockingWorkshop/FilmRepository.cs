@@ -13,7 +13,7 @@ namespace IntegrationTestingAndMockingWorkshop
             _connectionString = connectionString;
         }
 
-        public AddResult Add(Film film)
+        public RepositoryResult Add(Film film)
         {
             try
             {
@@ -25,12 +25,12 @@ namespace IntegrationTestingAndMockingWorkshop
                     cmd.Parameters.Add("Title", SqlDbType.NVarChar, -1).Value = film.Title;
                     cmd.Parameters.Add("Year", SqlDbType.Int).Value = film.Year;
                     cmd.ExecuteNonQuery();
-                    return new AddResult(true);
+                    return RepositoryResult.Successful;
                 }
             }
             catch (Exception)
             {
-                return new AddResult(false);
+                return RepositoryResult.Failed;
             }
         }
     }

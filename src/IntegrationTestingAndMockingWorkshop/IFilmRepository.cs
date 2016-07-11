@@ -2,6 +2,6 @@
 {
     public interface IFilmRepository
     {
-        AddResult Add(Film film);
+        RepositoryResult Add(Film film);
     }
 }

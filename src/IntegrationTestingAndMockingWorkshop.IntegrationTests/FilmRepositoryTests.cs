@@ -44,11 +44,11 @@ namespace IntegrationTestingAndMockingWorkshop.IntegrationTests
         }
 
         [Test]
-        public void WhenAFilmFailsToBeAddedThenTheReturnValueShouldIndicateFailure()
+        public void WhenAFilmIsAddedThenTheReturnValueShouldIndicateSuccess()
         {
             var result = _repository.Add(new Film("A Film", 1954));
 
-            Assert.That(result.Successful, Is.True);
+            Assert.That(result, Is.EqualTo(RepositoryResult.Successful));
         }
     }
 
@@ -70,7 +70,7 @@ namespace IntegrationTestingAndMockingWorkshop.IntegrationTests
         {
             var result = _repository.Add(new Film("A Film", 1954));
 
-            Assert.That(result.Successful, Is.False);
+            Assert.That(result, Is.EqualTo(RepositoryResult.Failed));
         }
     }
 }
