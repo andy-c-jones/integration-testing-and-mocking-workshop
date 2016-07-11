@@ -34,14 +34,4 @@ namespace IntegrationTestingAndMockingWorkshop
             }
         }
     }
-
-    public class AddResult
-    {
-        public bool Successful { get; set; }
-
-        public AddResult(bool successful)
-        {
-            Successful = successful;
-        }
-    }
 }
